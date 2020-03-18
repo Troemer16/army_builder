@@ -17,5 +17,10 @@ namespace army_builder
         {
             InitializeComponent();
         }
+
+        void CreateRedirect(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new CreatePage());
+        }
     }
 }
