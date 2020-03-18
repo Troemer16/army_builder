@@ -7,7 +7,7 @@
              x:Class="army_builder.CreatePage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Creation!!"
+            <Label x:Name="myLabel" Text="Creation!!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
