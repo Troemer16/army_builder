@@ -132,4 +132,7 @@
       <Name>army_builder</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\blood_angels_wallpaper.jpg" />
+  </ItemGroup>
 </Project>
