@@ -6,6 +6,6 @@
              mc:Ignorable="d"
              x:Class="army_builder.App">
     <Application.Resources>
-
+        <StyleSheet Source="styles/MainStyles.css" />
     </Application.Resources>
 </Application>
