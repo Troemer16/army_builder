@@ -6,10 +6,28 @@
              mc:Ignorable="d"
              x:Class="army_builder.MainPage">
 
+    <ContentPage.Resources>
+        <Style x:Key = "HomeButtons" TargetType = "Button">
+            <!-- Spacing -->
+            <Setter Property = "Margin" Value = "5"/>
+            
+            <!-- Text Edits -->
+            <Setter Property = "FontSize" Value = "16"/>
+            <Setter Property = "FontAttributes" Value="Bold"/>
+            <Setter Property = "TextColor" Value = "Gold"/>
+            
+            <!-- Background & Border -->
+            <Setter Property = "BackgroundColor" Value="Black"/>
+            <Setter Property = "BorderWidth" Value="5"/>
+            <Setter Property = "BorderColor" Value="Gold"/>
+            <Setter Property = "CornerRadius" Value="20"/>
+        </Style>
+    </ContentPage.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="6*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -22,8 +40,8 @@
                HorizontalOptions="FillAndExpand" Aspect="Fill"/>
         
         <StackLayout Grid.Row="1" Grid.Column="1">
-            <Button Text="Create Army" Clicked="CreateRedirect"/>
-            <Button Text="View Armies"/>
+            <Button Style = "{StaticResource HomeButtons}" Text="Create Army" Clicked="CreateRedirect"/>
+            <Button Style = "{StaticResource HomeButtons}" Text="View Armies"/>
         </StackLayout>
     </Grid>
 
