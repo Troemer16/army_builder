@@ -18,9 +18,12 @@ namespace army_builder
             InitializeComponent();
         }
 
-        void CreateRedirect(object sender, EventArgs e)
+        async void CreateRedirect(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new CreatePage());
+            string action = await DisplayActionSheet("Battle-Forged?", "Cancel", null, "Yes", "No");
+            bool battleForged = "Yes".Equals(action);
+
+            await Navigation.PushAsync(new CreatePage(battleForged));
         }
     }
 }

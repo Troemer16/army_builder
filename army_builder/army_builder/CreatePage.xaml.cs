@@ -3,15 +3,24 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Microsoft.Data.Sqlite;
+using System;
 
 namespace army_builder
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreatePage : ContentPage
     {
+        bool battleForged;
+
         public CreatePage()
         {
             InitializeComponent();
+        }
+
+        public CreatePage(bool battleForged)
+        {
+            InitializeComponent();
+            this.battleForged = battleForged;
         }
 
         protected override void OnAppearing()
@@ -63,7 +72,7 @@ namespace army_builder
             {
                 label += faction + "\n";
             }
-            myLabel.Text = label;
+            myLabel.Text = label + " " + battleForged;
         }
     }
 }
