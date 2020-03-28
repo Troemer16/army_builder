@@ -84,7 +84,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\arrow_icon.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\army_builder\army_builder.csproj">
       <Project>{599E2BDD-317D-416F-A9D9-DE2B75027916}</Project>

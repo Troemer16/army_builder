@@ -135,4 +135,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\blood_angels_wallpaper.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\arrow_icon.png" />
+  </ItemGroup>
 </Project>

@@ -26,6 +26,7 @@ namespace army_builder
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            
 
             Dictionary<int, string> factions = new Dictionary<int, string>();
 
@@ -35,16 +36,6 @@ namespace army_builder
 
             using(SqliteConnection conn = new SqliteConnection(connStr.ToString()))
             {
-                //string query = "CREATE TABLE soup_factions (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL)";
-                
-
-                //using (SqliteCommand cmd = conn.CreateCommand())
-                //{
-                  //  cmd.CommandText = query;
-                    //cmd.ExecuteNonQuery();
-                //}
-
-
                 string query = "SELECT * FROM soup_factions";
                 
                 using (SqliteCommand cmd = conn.CreateCommand())
@@ -53,11 +44,6 @@ namespace army_builder
                     conn.Open();
                     using (SqliteDataReader reader = cmd.ExecuteReader())
                     {
-                        //do
-                        //{
-                        //    factions.Add(reader.GetInt32(0), reader.GetString(1));
-                        //} while (reader.Read());
-
                         while (reader.Read())
                         {
                             factions.Add(reader.GetInt32(0), reader.GetString(1));
@@ -72,7 +58,7 @@ namespace army_builder
             {
                 label += faction + "\n";
             }
-            myLabel.Text = label + " " + battleForged;
+            //myLabel.Text = label + " " + battleForged;
         }
     }
 }
