@@ -8,19 +8,11 @@ using System;
 namespace army_builder
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CreatePage : ContentPage
+    public partial class FactionSelectionPage : ContentPage
     {
-        bool battleForged;
-
-        public CreatePage()
+        public FactionSelectionPage()
         {
             InitializeComponent();
-        }
-
-        public CreatePage(bool battleForged)
-        {
-            InitializeComponent();
-            this.battleForged = battleForged;
         }
 
         protected override void OnAppearing()
@@ -30,11 +22,13 @@ namespace army_builder
 
             Dictionary<int, string> factions = new Dictionary<int, string>();
 
-            SqliteConnectionStringBuilder connStr = new SqliteConnectionStringBuilder();
-            connStr.Add("Data Source", App.dbPath);
-            connStr.Add("Foreign Keys", true);
+            SqliteConnectionStringBuilder connStr = new SqliteConnectionStringBuilder
+            {
+                { "Data Source", App.dbPath },
+                { "Foreign Keys", true }
+            };
 
-            using(SqliteConnection conn = new SqliteConnection(connStr.ToString()))
+            using (SqliteConnection conn = new SqliteConnection(connStr.ToString()))
             {
                 string query = "SELECT * FROM soup_factions";
                 
@@ -58,7 +52,10 @@ namespace army_builder
             {
                 label += faction + "\n";
             }
-            //myLabel.Text = label + " " + battleForged;
+            
+
         }
+
+
     }
 }

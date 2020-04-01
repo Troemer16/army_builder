@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="army_builder.FactionSelectionPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="main" TargetType="Grid">
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Picker x:Name="factionTypes" Title="Army Faction Type"
+                    Grid.Row="0" Grid.Column="0" SelectedIndexChanged="PopulateFactionCategories">
+                <Picker.Items>
+                    <x:String>Soup</x:String>
+                    <x:String>Main</x:String>
+                    <x:String>Named</x:String>
+                </Picker.Items>
+            </Picker>
+            <Picker x:Name="factionCategory" Title="Faction Category"
+                    Grid.Row="0" Grid.Column="1">
+                
+            </Picker>
+
+            <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                
+            </ListView>
+        </Grid>
+        
+        
+    </ContentPage.Content>
+</ContentPage>

@@ -23,7 +23,12 @@ namespace army_builder
             string action = await DisplayActionSheet("Battle-Forged?", "Cancel", null, "Yes", "No");
             bool battleForged = "Yes".Equals(action);
 
-            await Navigation.PushAsync(new CreatePage(battleForged));
+            if (battleForged) {
+                await Navigation.PushAsync(new FactionSelectionPage());
+            } else {
+
+            }
+            
         }
     }
 }
