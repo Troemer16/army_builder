@@ -1,8 +1,5 @@
-﻿using army_builder.model;
-using Microsoft.Data.Sqlite;
-using System;
+﻿using Microsoft.Data.Sqlite;
 using System.Collections.Generic;
-using System.Text;
 
 namespace army_builder.database
 {
@@ -63,7 +60,7 @@ namespace army_builder.database
             if (soupId > 0) {
                 query = "SELECT * FROM main_factions WHERE soup_faction_id = " + soupId;
             } else {
-                query = "SELECT * FROM main_factions WHERE soup_faction_id = NULL";
+                query = "SELECT * FROM main_factions WHERE soup_faction_id IS NULL";
             }
 
             using (SqliteCommand cmd = conn.CreateCommand())

@@ -34,11 +34,20 @@
                 </Picker.Items>
             </Picker>
             <Picker x:Name="factionCategory" Title="Faction Category"
-                    Grid.Row="0" Grid.Column="1">
-            </Picker>
+                    Grid.Row="0" Grid.Column="1" SelectedIndexChanged="PopulateOptions"/>
 
-            <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                
+            <ListView x:Name="factionOptions" HasUnevenRows="True"
+                      Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" >
+                                <CheckBox x:Name="checkBox" Grid.Column="0"/>
+                                <Label Text="{Binding}" FontSize="20" Margin="5"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </Grid>
         

@@ -13,6 +13,9 @@ namespace army_builder
     {
         private IDictionary<string, List<string>> soupMainFactions;
         private IDictionary<string, List<string>> mainNamedFactions;
+        private string facType;
+        private CheckBox current;
+        private string selectedFaction;
 
         public FactionSelectionPage()
         {
@@ -30,10 +33,10 @@ namespace army_builder
         public void PopulateFactionCategories(object sender, EventArgs e)
         {
             Picker picker = (Picker)sender;
-            string selected = (string)picker.SelectedItem;
+            facType = (string)picker.SelectedItem;
             List<string> items = new List<string>();
 
-            switch (selected)
+            switch (facType)
             {
                 case "Soup":
                     items.Add("N/A");
@@ -45,12 +48,42 @@ namespace army_builder
                     items = new List<string>(mainNamedFactions.Keys);
                     break;
                 default:
-                    Console.WriteLine("Error with faction types: " + selected);
+                    Console.WriteLine("Error with faction types: " + facType);
                     break;
             }
 
             items.Sort();
             factionCategory.ItemsSource = items;
+        }
+
+        public void PopulateOptions(object sender, EventArgs e)
+        {
+            Picker picker = (Picker)sender;
+            string facCategory = (string)picker.SelectedItem;
+            List<string> items = new List<string>();
+
+            if(facCategory != null)
+            {
+                switch (facType)
+                {
+                    case "Soup":
+                        items = new List<string>(soupMainFactions.Keys);
+                        break;
+                    case "Main":
+                        soupMainFactions.TryGetValue(facCategory, out items);
+                        break;
+                    case "Named":
+                        mainNamedFactions.TryGetValue(facCategory, out items); ;
+                        break;
+                    default:
+                        Console.WriteLine("Error with faction types: " + facType);
+                        break;
+                }
+
+                items.Sort();
+            }
+     
+            factionOptions.ItemsSource = items;
         }
     }
 }
