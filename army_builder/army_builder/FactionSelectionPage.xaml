@@ -18,13 +18,13 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="9*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
-            
+
             <Picker x:Name="factionTypes" Title="Army Faction Type"
                     Grid.Row="0" Grid.Column="0" SelectedIndexChanged="PopulateFactionCategories">
                 <Picker.Items>
@@ -35,7 +35,6 @@
             </Picker>
             <Picker x:Name="factionCategory" Title="Faction Category"
                     Grid.Row="0" Grid.Column="1">
-                
             </Picker>
 
             <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">

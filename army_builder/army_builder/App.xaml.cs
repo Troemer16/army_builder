@@ -1,4 +1,5 @@
-﻿using System;
+﻿using army_builder.database;
+using System;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -7,7 +8,7 @@ namespace army_builder
 {
     public partial class App : Application
     {
-        public static string dbPath;
+        public static Database Db { get; private set; }
 
         public App()
         {
@@ -22,11 +23,9 @@ namespace army_builder
 
             MainPage = new NavigationPage(new MainPage());
 
-            dbPath = filePath;
-
             using (var source = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("army_builder.database.army_40k.db"))
             {
-                using (FileStream destination = File.Create(dbPath))
+                using (FileStream destination = File.Create(filePath))
                 {
                     try
                     {
@@ -39,6 +38,8 @@ namespace army_builder
 
                 }
             }
+
+            Db = new Database(filePath);
         }
 
         protected override void OnStart()
