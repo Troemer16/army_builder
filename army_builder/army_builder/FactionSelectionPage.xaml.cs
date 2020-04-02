@@ -24,29 +24,33 @@ namespace army_builder
             base.OnAppearing();
 
             soupMainFactions = App.Db.getSoupFactions();
+            mainNamedFactions = App.Db.getMainFactions();
         }
 
         public void PopulateFactionCategories(object sender, EventArgs e)
         {
             Picker picker = (Picker)sender;
             string selected = (string)picker.SelectedItem;
+            List<string> items = new List<string>();
 
             switch (selected)
             {
                 case "Soup":
-                    List<string> temp = new List<string>();
-                    temp.Add("N/A");
-                    factionCategory.ItemsSource = temp;
+                    items.Add("N/A");
                     break;
                 case "Main":
-                    factionCategory.ItemsSource = new List<string>(soupMainFactions.Keys);
+                    items = new List<string>(soupMainFactions.Keys);
                     break;
                 case "Named":
+                    items = new List<string>(mainNamedFactions.Keys);
                     break;
                 default:
                     Console.WriteLine("Error with faction types: " + selected);
                     break;
             }
+
+            items.Sort();
+            factionCategory.ItemsSource = items;
         }
     }
 }

@@ -80,5 +80,53 @@ namespace army_builder.database
 
             return factions;
         }
+
+        public IDictionary<string, List<string>> getMainFactions()
+        {
+            IDictionary<string, List<string>> factions = new Dictionary<string, List<string>>();
+
+            using (SqliteConnection conn = this.CreateConnection())
+            {
+                string query = "SELECT * FROM main_factions";
+
+                using (SqliteCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = query;
+                    conn.Open();
+                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int id = reader.GetInt32(0);
+                            factions.Add(reader.GetString(1), getNamedFactions(id, conn));
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+
+            return factions;
+        }
+
+        private List<string> getNamedFactions(int mainId, SqliteConnection conn)
+        {
+            List<string> factions = new List<string>();
+
+            string query = "SELECT * FROM named_factions WHERE main_faction_id = " + mainId;
+
+            using (SqliteCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = query;
+                using (SqliteDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        factions.Add(reader.GetString(1));
+                    }
+                }
+            }
+
+            return factions;
+        }
     }
 }
