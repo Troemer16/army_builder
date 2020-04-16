@@ -23,7 +23,7 @@ namespace army_builder.database
             return new SqliteConnection(connStr.ToString());
         }
 
-        public IDictionary<string, List<string>> getSoupFactions()
+        public IDictionary<string, List<string>> GetSoupFactions()
         {
             IDictionary<string, List<string>> factions = new Dictionary<string, List<string>>();
 
@@ -40,10 +40,10 @@ namespace army_builder.database
                         while (reader.Read())
                         {
                             int id = reader.GetInt32(0);
-                            factions.Add(reader.GetString(1), getMainFactions(id, conn));
+                            factions.Add(reader.GetString(1), GetMainFactions(id, conn));
                         }
 
-                        factions.Add("Other Xenos", getMainFactions(-1, conn));
+                        factions.Add("Other Xenos", GetMainFactions(-1, conn));
                     }
                     conn.Close();
                 }
@@ -52,7 +52,7 @@ namespace army_builder.database
             return factions;
         }
 
-        private List<string> getMainFactions(int soupId, SqliteConnection conn)
+        private List<string> GetMainFactions(int soupId, SqliteConnection conn)
         {
             List<string> factions = new List<string>();
 
@@ -78,7 +78,7 @@ namespace army_builder.database
             return factions;
         }
 
-        public IDictionary<string, List<string>> getMainFactions()
+        public IDictionary<string, List<string>> GetMainFactions()
         {
             IDictionary<string, List<string>> factions = new Dictionary<string, List<string>>();
 
@@ -95,7 +95,7 @@ namespace army_builder.database
                         while (reader.Read())
                         {
                             int id = reader.GetInt32(0);
-                            factions.Add(reader.GetString(1), getNamedFactions(id, conn));
+                            factions.Add(reader.GetString(1), GetNamedFactions(id, conn));
                         }
                     }
                     conn.Close();
@@ -105,7 +105,7 @@ namespace army_builder.database
             return factions;
         }
 
-        private List<string> getNamedFactions(int mainId, SqliteConnection conn)
+        private List<string> GetNamedFactions(int mainId, SqliteConnection conn)
         {
             List<string> factions = new List<string>();
 
@@ -124,6 +124,32 @@ namespace army_builder.database
             }
 
             return factions;
+        }
+
+        public int GetId(string name, string table)
+        {
+            int id = -1;
+
+            string query = "SELECT * FROM " + table + " WHERE name = '" + name + "'";
+
+            using (SqliteConnection conn = this.CreateConnection())
+            {
+                using (SqliteCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = query;
+                    conn.Open();
+                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            id = reader.GetInt32(0);
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+
+            return id;
         }
     }
 }

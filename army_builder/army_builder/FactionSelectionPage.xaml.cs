@@ -1,4 +1,5 @@
-﻿using System;
+﻿using army_builder.model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
@@ -23,8 +24,8 @@ namespace army_builder
         {
             base.OnAppearing();
 
-            soupMainFactions = App.Db.getSoupFactions();
-            mainNamedFactions = App.Db.getMainFactions();
+            soupMainFactions = App.Db.GetSoupFactions();
+            mainNamedFactions = App.Db.GetMainFactions();
         }
 
         public void PopulateFactionCategories(object sender, EventArgs e)
@@ -33,18 +34,18 @@ namespace army_builder
             factionOptions.ItemsSource = new List<string>();
 
             Picker picker = (Picker)sender;
-            facType = (string)picker.SelectedItem;
+            facType = ((string)picker.SelectedItem).ToLower();
             List<string> items = new List<string>();
 
             switch (facType)
             {
-                case "Soup":
+                case "soup":
                     items.Add("N/A");
                     break;
-                case "Main":
+                case "main":
                     items = new List<string>(soupMainFactions.Keys);
                     break;
-                case "Named":
+                case "named":
                     items = new List<string>(mainNamedFactions.Keys);
                     break;
                 default:
@@ -66,13 +67,13 @@ namespace army_builder
             {
                 switch (facType)
                 {
-                    case "Soup":
+                    case "soup":
                         items = new List<string>(soupMainFactions.Keys);
                         break;
-                    case "Main":
+                    case "main":
                         soupMainFactions.TryGetValue(facCategory, out items);
                         break;
-                    case "Named":
+                    case "named":
                         mainNamedFactions.TryGetValue(facCategory, out items); ;
                         break;
                     default:
@@ -93,7 +94,12 @@ namespace army_builder
 
         public void BuildRedirect(object sender, EventArgs e)
         {
+            
+            string table = facType + "_factions";
+            int id = App.Db.GetId(decision, table);
 
+            Faction faction = new Faction(id, decision, facType);
+            Navigation.PushAsync(new BuildPage(faction));
         }
     }
 }

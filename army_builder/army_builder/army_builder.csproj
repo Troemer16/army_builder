@@ -31,6 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="BuildPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="FactionSelectionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
