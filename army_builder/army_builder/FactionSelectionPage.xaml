@@ -9,16 +9,22 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="main" TargetType="Grid">
-                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+
+            <Style x:Key="options" TargetType="Label">
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="FontSize" Value="18"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <Grid>
+        <Grid x:Name="mainContent" Style="{StaticResource main}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="9*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
@@ -36,19 +42,19 @@
             <Picker x:Name="factionCategory" Title="Faction Category"
                     Grid.Row="0" Grid.Column="1" SelectedIndexChanged="PopulateOptions"/>
 
-            <ListView x:Name="factionOptions" HasUnevenRows="True"
+            <ListView x:Name="factionOptions" SelectionMode="Single" ItemSelected="SetDecision"
                       Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" >
-                                <CheckBox x:Name="checkBox" Grid.Column="0"/>
-                                <Label Text="{Binding}" FontSize="20" Margin="5"/>
-                            </StackLayout>
+                            <Label Text="{Binding}" Style="{StaticResource options}"/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <Button x:Name="continueButton" IsEnabled="False" Text="Continue" 
+                    Clicked="BuildRedirect" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
         </Grid>
         
         

@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Microsoft.Data.Sqlite;
-using System;
-using army_builder.model;
 
 namespace army_builder
 {
@@ -14,8 +12,7 @@ namespace army_builder
         private IDictionary<string, List<string>> soupMainFactions;
         private IDictionary<string, List<string>> mainNamedFactions;
         private string facType;
-        private CheckBox current;
-        private string selectedFaction;
+        private string decision;
 
         public FactionSelectionPage()
         {
@@ -32,6 +29,9 @@ namespace army_builder
 
         public void PopulateFactionCategories(object sender, EventArgs e)
         {
+            //clear current options as new options are being selected
+            factionOptions.ItemsSource = new List<string>();
+
             Picker picker = (Picker)sender;
             facType = (string)picker.SelectedItem;
             List<string> items = new List<string>();
@@ -62,7 +62,7 @@ namespace army_builder
             string facCategory = (string)picker.SelectedItem;
             List<string> items = new List<string>();
 
-            if(facCategory != null)
+            if (facCategory != null)
             {
                 switch (facType)
                 {
@@ -81,9 +81,19 @@ namespace army_builder
                 }
 
                 items.Sort();
+                factionOptions.ItemsSource = items;
             }
-     
-            factionOptions.ItemsSource = items;
+        }
+
+        public void SetDecision(object sender, SelectedItemChangedEventArgs e)
+        {
+            decision = e.SelectedItem.ToString();
+            continueButton.IsEnabled = true;
+        }
+
+        public void BuildRedirect(object sender, EventArgs e)
+        {
+
         }
     }
 }
