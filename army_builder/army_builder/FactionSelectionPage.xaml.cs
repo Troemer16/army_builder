@@ -12,12 +12,22 @@ namespace army_builder
     {
         private IDictionary<string, List<string>> soupMainFactions;
         private IDictionary<string, List<string>> mainNamedFactions;
+        private string armyCapType;
+        private int armyCap;
         private string facType;
         private string decision;
 
         public FactionSelectionPage()
         {
             InitializeComponent();
+            armyCap = -1;
+        }
+
+        public FactionSelectionPage(string armyCapType, int armyCap)
+        {
+            InitializeComponent();
+            this.armyCapType = armyCapType;
+            this.armyCap = armyCap;
         }
 
         protected override void OnAppearing()
@@ -99,7 +109,15 @@ namespace army_builder
             int id = App.Db.GetId(decision, table);
 
             Faction faction = new Faction(id, decision, facType);
-            Navigation.PushAsync(new BuildPage(faction));
+
+            if(armyCap < 0)
+            {
+                Navigation.PushAsync(new BuildPage(faction));
+            } else
+            {
+
+            }
+            
         }
     }
 }

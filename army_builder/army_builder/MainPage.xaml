@@ -22,12 +22,26 @@
             <Setter Property="BorderColor" Value="Gold"/>
             <Setter Property="CornerRadius" Value="20"/>
         </Style>
+
+        <Style x:Key="popupBlur" TargetType="Label">
+            <Setter Property="BackgroundColor" Value="Gray"/>
+            <Setter Property="Opacity" Value="0.5"/>
+            <Setter Property="IsVisible" Value="False"/>
+        </Style>
+
+        <Style x:Key="popup" TargetType="StackLayout">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="IsVisible" Value="False"/>
+        </Style>
     </ContentPage.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -35,13 +49,45 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
-        <Image Grid.RowSpan="2" Grid.ColumnSpan="3"
+        <Image Grid.Row="0" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="3"
                Source="blood_angels_wallpaper.jpg"
                HorizontalOptions="FillAndExpand" Aspect="Fill"/>
         
-        <StackLayout Grid.Row="1" Grid.Column="1">
-            <Button Style="{StaticResource HomeButtons}" Text="Create Army" Clicked="CreateRedirect"/>
+        <StackLayout Grid.Row="2"  Grid.RowSpan="2"  Grid.Column="1">
+            <Button Style="{StaticResource HomeButtons}" Text="Create Army" Clicked="Popup"/>
             <Button Style="{StaticResource HomeButtons}" Text="View Armies"/>
+        </StackLayout>
+
+        <Label x:Name="popupBlur" Style="{StaticResource popupBlur}"
+               Grid.Row="0" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="3"/>
+
+        <StackLayout x:Name="popup" Style="{StaticResource popup}"
+                     Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
+            <Picker Title="Battle-Forged?" SelectedIndexChanged="SetBattleForged">
+                <Picker.Items>
+                    <x:String>Yes</x:String>
+                    <x:String>No</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Picker Title="Army Limit Type" SelectedIndexChanged="SetCapType">
+                <Picker.Items>
+                    <x:String>Points</x:String>
+                    <x:String>Power Level</x:String>
+                    <x:String>No Limit</x:String>
+                </Picker.Items>
+            </Picker>
+            <Entry x:Name="armyLimit" Placeholder="Army Limit" Keyboard="Numeric" TextChanged="SetArmyCap"/>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="continue" Text="Continue" Clicked="CreateRedirect" BackgroundColor="Green"/>
+                <Button Text="Cancel" Clicked="Cancel" Grid.Column="1" BackgroundColor="Red"/>
+            </Grid>
         </StackLayout>
     </Grid>
 
